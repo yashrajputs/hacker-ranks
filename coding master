@@ -1,0 +1,74 @@
+In the kingdom of Spreadsheets, the art of cell coordinate conversion was a fascinating mystery. There were two numeration systems in place. In the first method, the first column was denoted as A, the second as B, and so on until column 26 marked by Z. Then came the two-letter numbers, where column 27 was called AA, 28 was AB, and column 52 was AZ. Beyond ZZ, there were three-letter numbers, and so forth.
+
+However, there existed a cryptic alternative - the "RXCY" system - where columns were represented by an "R" followed by an integer denoting the row, and then a "C" followed by an integer for the column. For example, BC23 in the letter-number system translated to R23C55 in the "RXCY" system.
+
+To unlock the secrets of this conversion, your task is to write a program that reads the given sequence of cell coordinates and produces each item written according to the rules of the other numeration system.
+
+If you succeed in creating this program, you will earn the prestigious title of "Master of Coding."
+
+Input Format
+
+The first line of the input contains integer number n (1 ≤ n ≤ 100), the number of coordinates in the test. Then there follow n lines, each of them contains coordinates.
+
+Constraints
+
+(1 ≤ n ≤ 100) All the coordinates are correct, there are no cells with the column and/or the row numbers larger than 106 .
+
+import java.util.Scanner;
+
+public class SpreadsheetConversion {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int n = scanner.nextInt(); 
+
+     
+        for (int i = 0; i < n; i++) {
+            String coordinate = scanner.next();
+            convertAndPrint(coordinate);
+        }
+
+        scanner.close();
+    }
+
+    static void convertAndPrint(String coordinate) {
+      
+        if (coordinate.matches("R\\d+C\\d+")) {
+ 
+            String[] parts = coordinate.split("[RC]");
+            int row = Integer.parseInt(parts[1]);
+            int col = Integer.parseInt(parts[2]);
+
+            String columnName = convertToColumnName(col);
+            System.out.println(columnName + row);
+        } else {
+           
+            int row = Integer.parseInt(coordinate.replaceAll("[A-Z]", ""));
+            String column = coordinate.replaceAll("\\d", "");
+
+            int col = convertToColumnNumber(column);
+            System.out.println("R" + row + "C" + col);
+        }
+    }
+
+    static String convertToColumnName(int col) {
+        StringBuilder columnName = new StringBuilder();
+
+        while (col > 0) {
+            int rem = (col - 1) % 26;
+            columnName.insert(0, (char) ('A' + rem));
+            col = (col - 1) / 26;
+        }
+
+        return columnName.toString();
+    }
+
+    static int convertToColumnNumber(String column) {
+        int col = 0;
+        for (char c : column.toCharArray()) {
+            col = col * 26 + (c - 'A' + 1);
+        }
+        return col;
+    }
+}
+
