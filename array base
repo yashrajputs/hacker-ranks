@@ -1,0 +1,66 @@
+Arun is daydreaming in Math class.He has a sheet of graph paper with n rows and m columns, and he imagines that there is an army base in each cell for a total n*m bases. He wants to drop supplies at strategic points on the sheet ,marking each drop point with a red dot; If a base contains at least one package inside or top of its border fence ,then it is considered to be supplied .For Example
+
+In a grid of 2*2 if he drops the package exactly at the intersecting border of all four bases then all four bases are considered to be supplied.
+
+Given n and m ,what's the minimum number of packages that Arun must drop to supply all of his bases?
+
+Input Format
+
+Two input lines containing number of rows (n) and number of columns (m).
+
+Constraints
+
+Should contain all the constraints on the input data that you may have. Format it like:
+
+1 ≤ n ≤ 100
+1 ≤ m ≤ 100
+Output Format
+
+Print a single integer denoting the minimum number of supply packages Arun must drop.
+
+Sample Input 0
+
+1
+1
+Sample Output 0
+
+1
+Sample Input 1
+
+5
+5
+Sample Output 1
+
+9
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+import java.util.Scanner;
+
+import java.util.Scanner;
+
+
+
+public class SupplyPackages {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+   
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+
+      
+        int minPackages = calculateMinPackages(n, m);
+        System.out.println(minPackages);
+
+        scanner.close();
+    }
+
+    static int calculateMinPackages(int n, int m) {
+     
+        return n + m - 1;
+    }
+}
